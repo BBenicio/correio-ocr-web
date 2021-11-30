@@ -4,10 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Route_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Core/Route"));
-Route_1.default.get('/', async ({ view }) => {
-    return view.render('welcome');
-});
-Route_1.default.get('/edition/:editionId', async ({ view }) => {
-    return view.render('edition');
-});
+Route_1.default.get('/', 'SubmissionsController.index');
+Route_1.default.get('/processingSubmission', 'SubmissionsController.checkCompletion');
+Route_1.default.post('/submitFile', 'SubmissionsController.submit');
+Route_1.default.get('/document/:filename/:pageNumber?', 'DocumentsController.viewPage');
 //# sourceMappingURL=routes.js.map

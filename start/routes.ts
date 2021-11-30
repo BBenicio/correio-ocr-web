@@ -20,25 +20,10 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async ({ view }) => {
-  return view.render('home')
-})
+Route.get('/', 'SubmissionsController.index')
 
-Route.get('/processingSubmission', async ({ view }) => {
-  return view.render('wait')
-})
+Route.get('/processingSubmission', 'SubmissionsController.checkCompletion')
 
-Route.get('/document/:filename/:pageNumber', async ({ view, request }) => {
-  const filename = request.param('filename');
-  const pageNumber = request.param('pageNumber')
-  console.log(filename, pageNumber)
-  return view.render('document', { filename, pageNumber })
-})
+Route.post('/submitFile', 'SubmissionsController.submit')
 
-Route.post('/submitFile', async ({ request, response }) => {
-  response.redirect('/processingSubmission')
-})
-
-Route.get('/edition/:editionId', async ({ view }) => {
-  return view.render('edition')
-})
+Route.get('/document/:filename/:pageNumber?', 'DocumentsController.viewPage')
