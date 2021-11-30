@@ -1,0 +1,92 @@
+body {
+    background-color: #eee;
+    height: 100%;
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+strong {
+    font-weight: bold;
+}
+
+main {
+    width: 45%;
+    margin: auto;
+    background-color: white;
+    padding: 32px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 56px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+form {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    display: block;
+}
+
+input[type="submit"] {
+    align-self: end;
+}
+
+.countdown {
+    display: block;
+    width: 100%;
+    text-align: right;
+}
+
+p {
+    text-align: justify;
+}
+.controls {
+    align-self: center;
+    display: block;
+}
+
+.controls input {
+    display: inline;
+}
+
+.side-by-side {
+    background-color: white;
+    display: flex;
+}
+
+.side-by-side div.text {
+    width: 40%;
+    height: 100%;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+iframe {
+    height: 100%;
+}
+
+.side-by-side div.image {
+    max-width: 60%;
+    display: inline-flex;
+}
+
+html, body {
+    height: 95%;
+}

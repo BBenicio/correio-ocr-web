@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <title>Correio da Lavoura OCR - {{ filename }}</title>
+</head>
+<body class="side-by-side">
+  <div class="text">
+    <div class="controls">
+      <input type="button" value="Anterior">
+      {{ pageNumber }}
+      <input type="button" value="Próxima">
+    </div>
+    <iframe src="/lipsum.txt" frameborder="0"></iframe>
+  </div>
+  <div class="image">
+    <img src="https://s3-alpha.figma.com/hub/file/948140848/1f4d8ea7-e9d9-48b7-b70c-819482fb10fb-cover.png" alt="">
+  </div>
+</body>
+</html>

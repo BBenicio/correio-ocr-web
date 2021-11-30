@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <title>Correio da Lavoura OCR - Processando Documento</title>
+</head>
+<body>
+  <main>
+    <h1>Processando Documento</h1>
+    
+    <p>
+      Aguarde alguns minutos, estamos trabalhando no seu arquivo. <br>
+      Esta página irá atualizar algumas vezes até que o seu documento esteja pronto.
+    </p>
+
+    <span class="countdown">Atualizando em 60s...</span>
+  </main>
+  <script>
+    let countdown = document.getElementsByClassName('countdown')[0];
+    let time = 60;
+    function step() {
+      if (--time > 0)
+        setTimeout(step, 1000);
+      else
+        document.location.reload()
+      countdown.innerHTML = `Atualizando em ${time}s...`
+    }
+    setTimeout(step, 1000);
+  </script>
+</body>
+</html>
