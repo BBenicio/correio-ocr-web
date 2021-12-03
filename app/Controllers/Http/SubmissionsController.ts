@@ -9,7 +9,6 @@ import Job from 'App/Models/Job'
 import Output from 'App/Models/Output'
 import Env from '@ioc:Adonis/Core/Env'
 import { promisify } from 'util'
-import { filenameToSteps } from 'memfs/lib/volume'
 
 export default class SubmissionsController {
   public async index(ctx: HttpContextContract) {
