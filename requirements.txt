@@ -6,3 +6,4 @@ pillow
 pdf2image
 opencv-python-headless
 pytesseract
+tqdm
