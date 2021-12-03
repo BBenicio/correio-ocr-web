@@ -10,6 +10,7 @@ export default class Jobs extends BaseSchema {
       table.integer('page_count')
       table.string('output_path')
       table.boolean('finished')
+      table.boolean('failed')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

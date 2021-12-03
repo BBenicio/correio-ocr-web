@@ -28,6 +28,6 @@ Route.post('/submitFile', 'SubmissionsController.submit')
 
 Route.get('/document/:fileId/:pageNumber?', 'DocumentsController.viewPage')
 
-Route.get('/text/:fileId/:pageNumber?', 'DocumentsController.getText')
+Route.get('/text/:outId', 'DocumentsController.getText')
 
-Route.get('/image/:fileId/:pageNumber?', 'DocumentsController.getImage')
+Route.get('/image/:outId', 'DocumentsController.getImage')

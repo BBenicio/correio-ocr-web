@@ -21,6 +21,9 @@ export default class Job extends BaseModel {
   @column()
   public finished: boolean
 
+  @column()
+  public failed: boolean
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
