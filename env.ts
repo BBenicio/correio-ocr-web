@@ -28,4 +28,7 @@ export default Env.rules({
   PG_USER: Env.schema.string(),
   PG_PASSWORD: Env.schema.string.optional(),
   PG_DB_NAME: Env.schema.string(),
+  OCR_INPUT_PATH: Env.schema.string(),
+  OCR_OUTPUT_PATH: Env.schema.string(),
+  OCR_PATH: Env.schema.string(),
 })

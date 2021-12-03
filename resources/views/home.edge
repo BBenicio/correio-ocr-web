@@ -15,8 +15,8 @@
     
     <p><strong>Envie um PDF para reconhecimento</strong></p>
 
-    <form action="/submitFile" method="post">
-      <input type="file" name="file" id="file" required>
+    <form action="/submitFile" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" required>
       <input type="submit" value="Enviar">
     </form>
   </main>

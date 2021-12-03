@@ -26,4 +26,8 @@ Route.get('/processingSubmission', 'SubmissionsController.checkCompletion')
 
 Route.post('/submitFile', 'SubmissionsController.submit')
 
-Route.get('/document/:filename/:pageNumber?', 'DocumentsController.viewPage')
+Route.get('/document/:fileId/:pageNumber?', 'DocumentsController.viewPage')
+
+Route.get('/text/:fileId/:pageNumber?', 'DocumentsController.getText')
+
+Route.get('/image/:fileId/:pageNumber?', 'DocumentsController.getImage')

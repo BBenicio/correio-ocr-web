@@ -1,0 +1,8 @@
+unidecode
+glob2
+numpy
+pandas
+pillow
+pdf2image
+opencv-python
+pytesseract
