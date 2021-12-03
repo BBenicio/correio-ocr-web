@@ -4,5 +4,5 @@ numpy
 pandas
 pillow
 pdf2image
-opencv-python
+opencv-python-headless
 pytesseract
