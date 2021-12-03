@@ -6,7 +6,7 @@ export default class Jobs extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('file_id').references('files.id')
+      table.integer('file_id').references('files.id').onDelete('CASCADE')
       table.integer('page_count')
       table.string('output_path')
       table.boolean('finished')

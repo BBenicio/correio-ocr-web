@@ -9,6 +9,7 @@ import Job from 'App/Models/Job'
 import Output from 'App/Models/Output'
 import Env from '@ioc:Adonis/Core/Env'
 import { promisify } from 'util'
+import { filenameToSteps } from 'memfs/lib/volume'
 
 export default class SubmissionsController {
   public async index(ctx: HttpContextContract) {
@@ -107,6 +108,7 @@ export default class SubmissionsController {
     if (job.finished) {
       return ctx.response.redirect(`/document/${job.file.id}`)
     } else if (job.failed) {
+      job.file.delete()
       return ctx.response.internalServerError(`Job ${jobId} falhou, tente novamente mais tarde ou contate o administrador.`)
     }
     
