@@ -1,5 +1,4 @@
-:repo:deb http://archive.ubuntu.com/ubuntu focal main
-poppler-utils
+http://mirrors.kernel.org/ubuntu/pool/main/p/poppler/poppler-utils_0.86.1-0ubuntu1_amd64.deb
 
 tesseract-ocr
 tesseract-ocr-por
