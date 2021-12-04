@@ -71,24 +71,37 @@ p {
     background-color: white;
     display: flex;
     justify-content: space-between;
-    height: inherit;
+    height: fit-content;
 }
 
 .side-by-side div.text {
     min-width: 40%;
     width: 100%;
-    height: 100%;
     display: inline-flex;
     flex-direction: column;
 }
 
+.side-by-side div.text iframe {
+    height: 100%;
+}
+
 .side-by-side div.image {
     max-width: 60%;
+    height: fit-content;
     display: inline-flex;
+}
+
+.side-by-side div.image a {
+    height: fit-content;
+    line-height: 0;
 }
 
 .side-by-side div.image a img {
     max-height: 100vh;
+}
+
+.page-number {
+    margin: 0 1em;
 }
 
 html, body {

@@ -15,7 +15,7 @@
       @if(previousPage)
         <a href="/document/{{fileId}}/{{previousPage}}">Anterior</a>
       @endif
-      {{ pageNumber }}
+      <span class="page-number">Página {{ pageNumber }}</span>
       @if(nextPage)
         <a href="/document/{{fileId}}/{{nextPage}}">Próxima</a>
       @endif
