@@ -82,10 +82,6 @@ p {
     flex-direction: column;
 }
 
-iframe {
-    height: 100%;
-}
-
 .side-by-side div.image {
     max-width: 60%;
     display: inline-flex;
