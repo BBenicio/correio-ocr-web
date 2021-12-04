@@ -30,7 +30,7 @@ export default class DocumentsController {
     const previousPage = pageNumber > 0 ? pageNumber - 1 : null
     const nextPage = pageNumber < pageCount ? pageNumber + 1 : null
 
-    return ctx.view.render('document', { fileName: fileSub.fileName, pageNumber, previousPage, nextPage, image: `/image/${out.id}`, text: `/text/${out.id}` })
+    return ctx.view.render('document', { fileName: fileSub.fileName, fileId, pageNumber, previousPage, nextPage, image: `/image/${out.id}`, text: `/text/${out.id}` })
   }
 
   public async getText(ctx: HttpContextContract) {
