@@ -22,12 +22,10 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', 'SubmissionsController.index')
 
-Route.get('/processingSubmission', 'SubmissionsController.checkCompletion')
-
 Route.post('/submitFile', 'SubmissionsController.submit')
+Route.get('/processingSubmission', 'SubmissionsController.checkCompletion')
 
 Route.get('/document/:fileId/:pageNumber?', 'DocumentsController.viewPage')
 
 Route.get('/text/:outId', 'DocumentsController.getText')
-
 Route.get('/image/:outId', 'DocumentsController.getImage')
