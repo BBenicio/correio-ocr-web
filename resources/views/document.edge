@@ -13,11 +13,11 @@
   <div class="text">
     <div class="controls">
       @if(previousPage)
-        <a href="/document/{{fileName}}/{{previousPage}}">Anterior</a>
+        <a href="/document/{{fileId}}/{{previousPage}}">Anterior</a>
       @endif
       {{ pageNumber }}
       @if(nextPage)
-        <a href="/document/{{fileName}}/{{nextPage}}">Próxima</a>
+        <a href="/document/{{fileId}}/{{nextPage}}">Próxima</a>
       @endif
     </div>
     <iframe src="{{ text }}" frameborder="0"></iframe>
