@@ -51,10 +51,10 @@ export default class SubmissionsController {
     const ocrDir = Env.get('OCR_PATH')
     const sp = spawn('python3', [`${ocrDir}/main.py`, '-p', '--pdf', file.filePath!, '-o', job.outputPath], { cwd: ocrDir })
     sp.stdout.on('data', (data) => {
-      ctx.logger.info(`ocr> ${data}`)
+      ctx.logger.info(`[OCR] ${data}`)
     })
     const onError = (err: any) => {
-      ctx.logger.error(`ocr> ${err}`)
+      ctx.logger.error(`[OCR] (ERROR) ${err}`)
       job.failed = true
       job.finished = false
       job.save()
@@ -107,6 +107,7 @@ export default class SubmissionsController {
     if (job.finished) {
       return ctx.response.redirect(`/document/${job.file.id}`)
     } else if (job.failed) {
+      ctx.logger.info(`job failed? ${job.failed}`)
       job.file.delete()
       return ctx.response.internalServerError(`Job ${jobId} falhou, tente novamente mais tarde ou contate o administrador.`)
     }
