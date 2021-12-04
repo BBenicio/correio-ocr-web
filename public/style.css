@@ -1,6 +1,7 @@
 body {
     background-color: #eee;
     height: 100%;
+    margin: 0;
 }
 
 * {
@@ -69,10 +70,13 @@ p {
 .side-by-side {
     background-color: white;
     display: flex;
+    justify-content: space-between;
+    height: inherit;
 }
 
 .side-by-side div.text {
-    width: 40%;
+    min-width: 40%;
+    width: 100%;
     height: 100%;
     display: inline-flex;
     flex-direction: column;
@@ -85,6 +89,10 @@ iframe {
 .side-by-side div.image {
     max-width: 60%;
     display: inline-flex;
+}
+
+.side-by-side div.image a img {
+    max-height: 100vh;
 }
 
 html, body {
