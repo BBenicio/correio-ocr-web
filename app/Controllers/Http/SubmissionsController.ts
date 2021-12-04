@@ -59,7 +59,6 @@ export default class SubmissionsController {
       job.finished = false
       job.save()
     }
-    sp.stderr.on('data', onError)
     sp.on('error', onError)
 
     return ctx.response.redirect(`/processingSubmission?jobId=${job.id}`)
