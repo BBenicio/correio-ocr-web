@@ -51,7 +51,14 @@ export default class SubmissionsController {
     const ocrDir = Env.get('OCR_PATH')
     const sp = spawn('python3', [`${ocrDir}/main.py`, '-p', '--pdf', file.filePath!, '-o', job.outputPath], { cwd: ocrDir })
     sp.stdout.on('data', (data) => {
-      ctx.logger.info(`[OCR] ${data}`)
+      ctx.logger.info(`[OCR] (stdout) ${data}`)
+    })
+    sp.stderr.on('data', (data) => {
+      ctx.logger.info(`[OCR] (stderr) ${data}`)
+    })
+    sp.on('close', (code) => {
+      ctx.logger.info(`[OCR] (close) ${code}`)
+      if (code !== 0) onError(`process exited with non-zero code '${code}'`)
     })
     const onError = (err: any) => {
       ctx.logger.error(`[OCR] (ERROR) ${err}`)
