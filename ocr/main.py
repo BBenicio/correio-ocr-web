@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 from process_pdfs import convert_pdfs
 from image_prep import deskew, prepare_image
-from image_processing import crop_background, crop_to_page
+from image_processing import extract_page
 from mhs_layout_analisys import segment
 import utils
 
@@ -62,13 +62,11 @@ for ed_name, page_name, page in tqdm(all_files):
     os.makedirs(output_path, exist_ok=True)
 
     log('cropping image')
-    image, _ = crop_background(image, f'./temp/{ed_name}/{page_name}/', f'./temp/{ed_name}/{page_name}/cropped.png')
+    image, _ = extract_page(image, f'./temp/{ed_name}/{page_name}/', f'./temp/{ed_name}/{page_name}/cropped.png')
 
     log('preparing image')
     image = prepare_image(image, f'./temp/{ed_name}/{page_name}/prepared.png', f'./temp/{ed_name}/{page_name}', verbose=VERBOSE)
 
-    log('cropping page')
-    image, _ = crop_to_page(image, f'./temp/{ed_name}/{page_name}/', f'./temp/{ed_name}/{page_name}/cropped_page.png')
 
     if DO_MHS:
         image, _, _ = segment(image, f'./temp/{ed_name}/{page_name}/')

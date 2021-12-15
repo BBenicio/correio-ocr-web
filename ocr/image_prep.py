@@ -102,6 +102,27 @@ def prepare_image(image, output_path: str = None, temp_folder: str = None, binar
     return image
 
 
+def get_contour_angle(contour) -> float:
+    '''Get the angle of the contour.
+
+    Args:
+        contour: contour from which to find the angle
+    
+    Returns:
+        float: angle of the contour
+    '''
+    minAreaRect = cv2.minAreaRect(contour)
+        
+    angle = minAreaRect[-1]
+    if angle < 0:
+        angle = 360 + angle
+    angle = angle % 90
+    if angle > 45:
+        angle = -90 + angle
+    
+    return -angle
+
+
 def get_skew_angle(cvImage) -> float:
     '''Get the angle to which an image is skewed.
 
@@ -135,19 +156,8 @@ def get_skew_angle(cvImage) -> float:
     angles = np.zeros(len(contours))
     # org = np.zeros(len(contours))
     for i in range(len(contours)):
-        minAreaRect = cv2.minAreaRect(contours[i])
+        angles[i] = get_contour_angle(contours[i])
         
-        angles[i] = minAreaRect[-1]# % 90 if minAreaRect[-1] > 0 else minAreaRect[-1] % -90
-        # org[i] = minAreaRect[-1]
-        if angles[i] < 0:
-            angles[i] = 360 + angles[i]
-        angles[i] = angles[i] % 90
-        if angles[i] > 45:
-            angles[i] = -90 + angles[i]
-        angles[i] = -angles[i]
-        # if angles[i] < -45:
-            # angles[i] = 90 + angles[i]
-        # angles[i] = -1.0 * angles[i]
     # print('', np.mean(org), np.quantile(org, [0, 0.25, 0.5, 0.75, 1]))
     # print('', np.mean(angles), np.quantile(angles, [0, 0.25, 0.5, 0.75, 1]))
     return np.median(angles)

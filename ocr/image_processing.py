@@ -1,5 +1,7 @@
-from image_prep import remove_noise
+from numpy.lib.function_base import disp
+from image_prep import remove_noise, get_contour_angle, rotate_image
 from utils import conditional_save, get_conditional_path
+from scipy.signal import find_peaks
 import numpy as np
 import cv2
 import os
@@ -292,3 +294,71 @@ def crop_to_page(image, temp_folder: str = None, output_path: str = None) -> tup
     conditional_save(cropped, output_path)
     
     return cropped, (left, right, top, bottom)
+
+def extract_page(image, temp_folder: str = None, output_path: str = None) -> tuple:
+    '''Extract the page based on (Chandrasekar, 2020).
+
+    Args:
+        image (cv2 image): colored image to process
+        output_path (str): path to write the output image to, does not save if equals None. default=None
+        temp_folder (str): folder to write the intermediary files to, does not save if equals None. default=None
+
+    Returns:
+        tuple: image of the main body (cv2 image); crop coordinates
+    '''
+
+    ### Book Extraction
+    #convert the BGR image to HSV colour space
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+    # hue varies between 10 and 40; saturation between 0 and 60; value between 60 and 200
+    lower_bg = (10, 0, 60)
+    upper_bg = (40, 255, 200)
+
+    mask = cv2.inRange(hsv, lower_bg, upper_bg)
+    conditional_save(mask, get_conditional_path('page_mask.png', temp_folder))
+    
+    cnts = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
+    cnts = sorted(cnts, key=lambda x: cv2.contourArea(x))
+    cnt = cnts[-1] # select largest
+
+    #### Straighten the image
+    angle = get_contour_angle(cnt)
+    image = rotate_image(image, -angle)
+    hsv = rotate_image(hsv, -angle)
+    mask = rotate_image(mask, -angle)
+
+    cnts = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
+    cnts = sorted(cnts, key=lambda x: cv2.contourArea(x))
+    cnt = cnts[-1] # select largest
+
+    x, y, w, h = cv2.boundingRect(cnt)
+
+    img = image[y:y+h, x:x+w]
+    hsv = hsv[y:y+h, x:x+w]
+    
+    ### Hinge Detection
+    s = hsv[:,:,1]
+    
+    sat_mean = np.mean(s, axis=0)
+    idx, _ = find_peaks(sat_mean, prominence=10)
+    left, right = np.min(idx), np.max(idx)
+    
+    img = img[:, left:right]
+    hsv = hsv[:, left:right]
+    conditional_save(img, get_conditional_path('after_hinge.png', temp_folder))
+    
+    ### Page Detection (altered)
+    #create the mask over the new image
+    mask = cv2.inRange(hsv, lower_bg, upper_bg)
+    
+    # keep the lines that have 30% or more of "page" pixels
+    is_page = mask > 0
+    is_page = np.argwhere(is_page.sum(axis=1) > 0.3 * mask.shape[0]).flatten()
+    top, bottom = np.min(is_page), np.max(is_page)
+
+    conditional_save(img[top:bottom,:], output_path)
+    
+    return img[top:bottom,:], (left, right, top, bottom)
